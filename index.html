@@ -86,11 +86,6 @@ h1[tabindex="-1"]:focus{outline:none}
 .noanim .page{animation:none!important}
 .page{display:flex;flex-direction:column;gap:20px;padding-bottom:28px;animation:rise .28s ease-out both}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media (min-width:960px){
-  .stage{gap:44px;padding:20px 28px;align-items:center}
-  .side{display:block;flex:0 0 370px;max-height:100%;overflow:auto;padding:6px 4px 6px 0}
-  .phone{height:min(100%,880px);border:9px solid var(--frame);border-radius:44px;box-shadow:0 34px 60px -24px rgba(10,40,38,.5)}
-}
 
 /* ---------- Top bars ---------- */
 .topbar{display:flex;align-items:center;gap:10px;padding-top:14px;padding-bottom:4px;min-height:60px}
@@ -374,6 +369,100 @@ details.howto[open] summary{margin-bottom:4px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
+
+/* =====================================================================
+   VERSION PC (fenêtre de 900 px ou plus) : navigation à gauche, contenu en colonnes.
+   Le téléphone (moins de 900 px) n'est pas touché. La maquette (html.mq) garde son cadre de téléphone.
+   ===================================================================== */
+.pcside{display:flex;flex-direction:column;gap:4px;min-height:100%}
+.pcside .pcbrand{display:flex;align-items:center;gap:12px;padding:2px 10px 12px;font-family:var(--font-display);font-weight:800;font-size:1.25rem;letter-spacing:.03em;color:var(--primary-strong)}
+.pcside .pcbrand small{display:block;font-family:var(--font-body);font-weight:700;font-size:.74rem;letter-spacing:.02em;color:var(--ink-2)}
+.pcside .pclabel{margin:16px 10px 4px;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.pcside .pcn{display:flex;align-items:center;gap:12px;width:100%;min-height:42px;padding:0 14px;border-radius:14px;border:0;background:none;color:var(--ink-2);font-weight:800;font-size:.97rem;text-align:left;cursor:pointer}
+.pcside .pcn:hover{background:var(--surface-2);color:var(--ink)}
+.pcside .pcn[aria-current="page"]{background:var(--primary-soft);color:var(--primary-strong)}
+.pcside .pcn.big{min-height:48px;font-size:1.02rem}
+.pcside .pcn.warn .ic{color:var(--coral)}
+.pcside .pcchild{display:flex;align-items:center;gap:12px;width:100%;margin:2px 0 8px;padding:10px 12px;border-radius:16px;border:0;background:linear-gradient(150deg,var(--hero-a),var(--hero-b));color:var(--on-hero);text-align:left;cursor:pointer}
+.pcside .pcchild .avatar{width:42px;height:42px;border-radius:14px;font-size:1.4rem}
+.pcside .pcchild b{display:block;font-family:var(--font-display);font-size:1.1rem;line-height:1.1}
+.pcside .pcchild span.s{font-size:.84rem;opacity:.92}
+.pcside .pcfoot{margin-top:auto;padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.pcside .pcfoot .row{justify-content:space-between}
+.pcside .pcctl{flex-wrap:wrap;gap:8px}
+@media (max-height:800px){.pcside .pcn{min-height:38px}.pcside .pcn.big{min-height:42px}.pcside .pclabel{margin-top:10px}.pcside .pcbrand small{display:none}.pcside .pcbrand{padding-bottom:8px}.pcside .pcfoot{padding-top:8px}.pcside .pcfoot>.tiny{display:none}}
+.pcside details.pcdemo{border:1px solid var(--line);border-radius:14px;padding:0 10px;background:var(--surface-2)}
+.pcside details.pcdemo summary{min-height:44px;display:flex;align-items:center;font-weight:800;font-size:.9rem;cursor:pointer}
+.pcside details.pcdemo[open] summary{margin-bottom:6px}
+.pcside .demo-steps button{font-size:.86rem}
+.pcside .tiny{padding:0 4px}
+
+@media (min-width:900px){
+  html.authed:not(.mq) .stage{display:grid;grid-template-columns:292px minmax(0,1fr);gap:0;padding:0;height:100%;align-items:stretch}
+  html.authed:not(.mq) .side{display:block;max-height:none;height:100%;overflow:auto;padding:18px 14px;background:var(--surface);border-right:1px solid var(--line);flex:none}
+  html.authed:not(.mq) .phone{flex:none;width:auto;max-width:none;height:100%;min-width:0;border:0;border-radius:0;box-shadow:none;background:var(--bg)}
+  html.authed:not(.mq) .tabbar{display:none!important}
+  html.authed:not(.mq) #screen{padding:0 clamp(24px,4vw,64px) 48px}
+  html.authed:not(.mq) .page{max-width:1180px;margin:0 auto;width:100%;gap:22px;padding-bottom:12px}
+  html.authed:not(.mq) .pad{padding-left:0;padding-right:0}
+  html.authed:not(.mq) .topbar{padding-top:30px;min-height:76px}
+  html.authed:not(.mq) .topbar h1{font-size:2rem}
+  html.authed:not(.mq) .home-head{padding-top:30px}
+  html.authed:not(.mq) .home-head>.row:first-child{display:none}
+  html.authed:not(.mq) .home-head h1{font-size:2.1rem!important}
+  html.authed:not(.mq) .topbar .lang,html.authed:not(.mq) .topbar .netchip{display:none}
+  html.authed:not(.mq) .scroller{margin:0;padding:0 0 4px;flex-wrap:wrap;overflow:visible}
+  html.authed:not(.mq) .chip{min-height:46px}
+  html.authed:not(.mq) .btn{width:auto;min-width:220px;max-width:100%;align-self:flex-start;padding:0 28px}
+  html.authed:not(.mq) .btn-row{flex-wrap:wrap}html.authed:not(.mq) .btn-row .btn{flex:1 1 220px}
+  html.authed:not(.mq) .form .btn,html.authed:not(.mq) form.pad .btn{align-self:stretch}
+  html.authed:not(.mq) .btn.sm{min-width:0}
+  html.authed:not(.mq) .card,html.authed:not(.mq) .cardlink,html.authed:not(.mq) .tile,html.authed:not(.mq) .child-card{transition:transform .15s,box-shadow .15s}
+  html.authed:not(.mq) .card{padding:20px}
+  html.authed:not(.mq) .article p,html.authed:not(.mq) .article li{font-size:1.06rem}
+  /* fenêtres de dialogue au centre, au lieu de la feuille du bas */
+  html.authed:not(.mq) .overlay{align-items:center;justify-content:center}
+  html.authed:not(.mq) .sheet{width:min(560px,92%);max-height:86%;border-radius:28px;box-shadow:0 30px 70px -20px rgba(0,0,0,.45);padding:26px 28px 28px}
+  html.authed:not(.mq) .grab{display:none}
+  html.authed:not(.mq) .toast{left:0;right:0;margin:0 auto;width:fit-content;max-width:min(560px,90%);bottom:28px}
+  html.authed:not(.mq) .netbar{padding-left:clamp(24px,4vw,64px);padding-right:clamp(24px,4vw,64px)}
+
+  /* écrans de saisie et de lecture : colonne centrale */
+  html.authed:not(.mq) #screen:is([data-route=content],[data-route=ask],[data-route=measure],[data-route=appointment],[data-route=add-child],[data-route=consent],[data-route=child],[data-route=reminders],[data-route=notif],[data-route=language],[data-route=forgot],[data-route=activity]) .page{max-width:780px}
+  html.authed:not(.mq) #screen[data-route=content] .page{max-width:840px}
+
+  /* écrans « tableau » : cartes en colonnes */
+  html.authed:not(.mq) #screen:is([data-route=home],[data-route=suivi],[data-route=special],[data-route=nutrition],[data-route=profile],[data-route=protection]) .page>.pad.stack{display:block;columns:2 340px;column-gap:26px}
+  html.authed:not(.mq) #screen:is([data-route=home],[data-route=suivi],[data-route=special],[data-route=nutrition],[data-route=profile],[data-route=protection]) .page>.pad.stack>*{break-inside:avoid;margin:0 0 20px}
+  html.authed:not(.mq) #screen:is([data-route=home],[data-route=suivi],[data-route=special],[data-route=nutrition],[data-route=profile],[data-route=protection]) .page>.pad.stack>:is(.scroller,.notice,.demo-tag,p.tiny,p.muted,.badge,.btn-row,.row,.field,.sec-title){column-span:all}
+
+  /* écrans « liste » : grille de cartes */
+  html.authed:not(.mq) #screen:is([data-route=activities],[data-route=tips],[data-route=offline]) .page>.pad.stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px 22px;align-items:stretch}
+  html.authed:not(.mq) #screen:is([data-route=activities],[data-route=tips],[data-route=offline]) .page>.pad.stack>:not(.cardlink){grid-column:1/-1}
+  /* très grand écran : page plus large, trois colonnes sur les tableaux */
+  @media (min-width:1700px){
+    html.authed:not(.mq) .page{max-width:1420px}
+    html.authed:not(.mq) #screen:is([data-route=home],[data-route=special],[data-route=nutrition],[data-route=profile]) .page>.pad.stack{columns:3 340px}
+  }
+  /* services : catégories sur 3 colonnes, résultats en grille */
+  html.authed:not(.mq) #screen[data-route=services] .grid2.svc-cats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  html.authed:not(.mq) #screen[data-route=services] #svc-list>ul.stack{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px 22px;align-items:stretch}
+  html.authed:not(.mq) #screen[data-route=services] #svc-list>ul.stack>li{display:flex}
+  html.authed:not(.mq) #screen[data-route=services] #svc-list>ul.stack>li>.card{width:100%}
+  html.authed:not(.mq) #screen[data-route=services] #svc-list>ul.stack .btn{min-width:0}
+  html.authed:not(.mq) #screen[data-route=firstaid] .grid2{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  html.authed:not(.mq) #screen[data-route=protection] .grid2{gap:16px}
+  html.authed:not(.mq) .sheet .btn,html.authed:not(.mq) .overlay .btn{width:100%;align-self:stretch}
+  html.authed:not(.mq) .cardlink:hover,html.authed:not(.mq) .tile:hover,html.authed:not(.mq) .child-card:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(10,40,38,.35)}
+}
+
+@media (min-width:900px){
+  /* avant la connexion (accueil, connexion, inscription) : une carte centrée, comme sur téléphone */
+  html:not(.mq):not(.authed) body{background:var(--page)}
+  html:not(.mq):not(.authed) .stage{justify-content:center;align-items:center;padding:28px}
+  html:not(.mq):not(.authed) .side{display:none}
+  html:not(.mq):not(.authed) .phone{flex:0 1 520px;height:min(100%,920px);border-radius:36px;box-shadow:0 34px 60px -24px rgba(10,40,38,.5)}
+}
 </style>
 </head>
 <body>
@@ -448,6 +537,7 @@ function correctedAge(c) {                // âge corrigé : indicatif, jamais u
     : (mm < 1 ? `environ ${w} semaines` : frac >= 0.75 ? `environ ${whole + 1} mois` : frac >= 0.25 ? `environ ${whole} mois et demi` : `environ ${whole} mois`);
   return { days: d, months: whole, label };
 }
+const isPC = () => matchMedia("(min-width:900px)").matches && !document.documentElement.classList.contains("mq");   /* version PC (grand écran) */
 const isStandalone = () => (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
 const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 const fmtTime = t => LANG === "en" ? t : String(t).replace(":", "h");
@@ -733,7 +823,7 @@ CONTENTS.push(
     ["ul", ["Calmez l'enfant, regardez la bosse et posez un linge froid pendant 10 minutes.", "Gardez-le près de vous et observez-le attentivement pendant 24 heures."]],
     ["h", "Allez aux urgences tout de suite si"],
     ["ul", ["Il perd connaissance, même brièvement, ou n'est pas comme d'habitude (très endormi, confus, difficile à réveiller).", "Il vomit plusieurs fois, a des convulsions ou un fort mal de tête.", "Du sang ou un liquide clair coule du nez ou des oreilles.", "La bosse est grosse et molle, la fontanelle est bombée, ou la chute vient de haut.", "C'est un bébé de moins d'un an."]])),
-  FA("f9", "Un enfant a avalé un produit", "Produit ménager, médicament, pétrole : les bons réflexes.", 2, B(
+  FA("f9", "Un enfant a avalé un produit", "Produit ménager (eau de Javel, par exemple), médicament, pétrole : les bons réflexes.", 2, B(
     ["h", "Que faire"],
     ["ul", ["Retirez de sa bouche ce qui reste du produit et éloignez le flacon.", "Gardez l'emballage pour le montrer.", "Allez tout de suite dans un établissement de santé, ou faites appeler les secours, avec l'emballage.", "Notez ce qu'il a pris, la quantité approximative et l'heure."]],
     ["h", "À ne pas faire"],
@@ -1070,6 +1160,8 @@ Object.assign(EN.dict, {
   "Aucune mesure enregistrée. Ajoutez la première pour voir son évolution.": "No measurement recorded. Add the first one to see its trend.",
   "Touchez un point pour voir sa valeur. Ce graphique montre uniquement les mesures que vous avez enregistrées. Il ne contient aucun seuil médical.": "Tap a point to see its value. This chart only shows the measurements you have recorded. It contains no medical threshold.",
   "PETIT PAS affiche uniquement les informations que vous enregistrez. Il ne dit jamais si une mesure est « normale » ou non. Parlez-en à votre professionnel de santé.": "PETIT PAS only shows the information you record. It never says whether a measurement is “normal” or not. Talk to your health professional.",
+  "Aussi dans PETIT PAS": "Also in PETIT PAS",
+  "Données fictives de démonstration. Contenus de santé et numéros à valider avant tout usage réel.": "Fictional demonstration data. Health content and phone numbers to be validated before any real use.",
   "Renseignez au moins le poids ou la taille. PETIT PAS ne juge pas les valeurs saisies.": "Enter at least the weight or the height. PETIT PAS does not judge the values entered.",
   "PETIT PAS affiche les informations que vous enregistrez. Les courbes de référence de l'écran Croissance sont indicatives : seul un professionnel de santé peut dire si votre enfant grandit bien.": "PETIT PAS shows the information you enter. The reference curves on the Growth screen are indicative: only a health professional can say whether your child is growing well.",
   "Renseignez au moins le poids ou la taille. Dans Croissance, vos mesures sont comparées aux courbes de référence de l'OMS, à titre indicatif.": "Enter at least the weight or the height. In Growth, your measurements are compared with the WHO reference curves, as a guide only.",
@@ -1372,7 +1464,7 @@ Object.assign(EN.contents, {
     body: [["h", "What to do"], ["ul", ["Keep breastfeeding and feeding the child.", "Give ORS (oral rehydration salts), prepared with clean water as shown on the sachet, in small frequent sips with a spoon.", "If they vomit, wait 10 minutes then start again slowly.", "Ask a health worker whether to add zinc.", "Wash your hands before preparing the ORS."]], ["h", "Signs of dehydration"], ["ul", ["Dry mouth, no tears, sunken eyes, sunken soft spot on a baby's head.", "Little or no urine, great thirst, or on the contrary a very weak, sleepy child."]], ["h", "Seek care quickly if"], ["ul", ["There is blood in the stools, non-stop vomiting or a high fever.", "The child refuses to drink, is very weak or has the signs above.", "The diarrhoea lasts more than 2 days, or affects a baby under 6 months."]]] },
   f8: { title: "Fall or bump to the head", summary: "Watch the child and recognise the signs that mean going to emergency.",
     body: [["h", "What to do"], ["ul", ["Calm the child, look at the bump and put a cold cloth on it for 10 minutes.", "Keep them close and watch them carefully for 24 hours."]], ["h", "Go to emergency straight away if"], ["ul", ["They lose consciousness, even briefly, or are not themselves (very sleepy, confused, hard to wake).", "They vomit several times, have convulsions or a bad headache.", "Blood or clear fluid comes from the nose or ears.", "The bump is big and soft, the soft spot on a baby's head bulges, or the fall was from a height.", "It is a baby under one year old."]]] },
-  f9: { title: "A child has swallowed a product", summary: "Household product, medicine, paraffin: the right reflexes.",
+  f9: { title: "A child has swallowed a product", summary: "Household product (bleach, for example), medicine, paraffin: the right reflexes.",
     body: [["h", "What to do"], ["ul", ["Remove what is left of the product from their mouth and move the container away.", "Keep the packaging to show.", "Go straight to a health facility, or have someone call the emergency services, with the packaging.", "Note what they took, the approximate amount and the time."]], ["h", "What not to do"], ["ul", ["Do not make them vomit.", "Do not give milk, oil, salt water or any home remedy, unless a professional advises it.", "Do not wait for signs to appear."]], ["h", "How to prevent it"], ["p", "Keep medicines, household products, paraffin and pesticides out of reach, in their original packaging, never in a water or drink bottle."]] },
   f10: { title: "Snake bite", summary: "Stay calm, keep still and get to a health facility quickly.",
     body: [["h", "What to do"], ["ul", ["Move the child away from the snake and keep them calm and still: moving spreads the venom faster.", "Immobilise the bitten limb as for a fracture, at heart level or lower.", "Remove rings, bracelets and tight clothing before the limb swells.", "Take the child straight to a health facility, carrying them if possible.", "Note the time of the bite and, if safe, what the snake looked like. Do not waste time looking for it."]], ["h", "What not to do"], ["ul", ["Do not apply a tourniquet, cut, suck, or put on any product or plant.", "Do not give alcohol or medicines.", "Do not apply ice."]]] },
@@ -2354,8 +2446,23 @@ function vDemo() {
 function demoStepsHTML() { return `<ol class="demo-steps card flat" style="padding:8px">${DEMO_STEPS.map(s => `<li class="${S.steps[s.k] ? "done" : ""}"><button data-act="demo-go" data-k="${s.k}"><span class="b"></span><span>${s.t}</span></button></li>`).join("")}</ol>`; }
 
 /* Panneau latéral (grand écran) */
+function renderSidePC(el) {
+  const me = Repo.me(), c = Repo.active(), e = cur();
+  if (!me) { el.innerHTML = ""; return; }
+  const XR = ["firstaid", "ask", "tips", "nutrition", "protection", "offline", "reminders"], inExtra = XR.includes(e.name);
+  const nav = TABS.map(t => `<button class="pcn big" data-act="tab" data-id="${t.root}" aria-current="${!inExtra && e.tab === t.id ? "page" : "false"}">${ic(t.icon)}<span>${t.label}</span></button>`).join("");
+  const X = [["firstaid", "cross", "Premiers secours", "warn"], ["ask", "chat", "Poser une question"], ["tips", "book", "Conseils"], ["nutrition", "heart", "Nutrition"], ["protection", "shield", "Protection de l'enfant"], ["offline", "download", "Ressources hors connexion"], ["reminders", "bell", "Rappels"]];
+  const extra = X.map(([r, i, l, w]) => `<button class="pcn ${w || ""}" data-act="pc-go" data-r="${r}" aria-current="${e.name === r ? "page" : "false"}">${ic(i)}<span>${l}</span></button>`).join("");
+  el.innerHTML = trHTML(`<div class="pcside"><div class="pcbrand">${brandMark(40)}<span>PETIT PAS<small>Chaque petit pas compte.</small></span></div>
+    ${c ? `<button class="pcchild" data-go="child" data-p="${P({ id: c.id })}"><span class="avatar" aria-hidden="true">👶</span><span><b>${esc(c.firstName)}</b><span class="s">${ageLabel(c.birthDate)}${isSpecial(c) ? " · Suivi particulier" : ""}</span></span></button>` : ""}
+    <nav aria-label="Navigation principale">${nav}</nav><div class="pclabel">Aussi dans PETIT PAS</div><nav aria-label="Autres rubriques">${extra}</nav>
+    <div class="pcfoot"><div class="row pcctl">${netChip()}${langPill()}</div>
+    ${me.demo ? `<details class="pcdemo"${UI.pcDemo ? " open" : ""}><summary>Outils de démonstration</summary>${demoStepsHTML()}<div class="btns"><button class="btn sm soft" data-act="demo-load">Charger Patricia &amp; Amel</button><button class="btn sm secondary" data-act="ask-reset">Réinitialiser</button></div></details>` : ""}
+    <p class="tiny">Données fictives de démonstration. Contenus de santé et numéros à valider avant tout usage réel.</p></div></div>`);
+}
 function renderSide() {
   const el = $("#side"); if (!el) return;
+  if (isPC()) return renderSidePC(el);
   const done = DEMO_STEPS.filter(s => S.steps[s.k]).length;
   el.innerHTML = trHTML(`<div class="logo-card" style="max-width:320px">${logoFull()}</div>
   <h2>Prototype MVP navigable</h2><p class="lead">Suivre → Comprendre → Apprendre → S'orienter. Pour les parents et tuteurs d'enfants de 0 à 6 ans au Togo. Rôle simulé : Parent / Tuteur.</p>
@@ -2408,7 +2515,7 @@ const askCount = () => { const a = S.settings.ask; S.settings.ask = a && a.day =
 const normTxt = s => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 const STOPW = new Set(["les", "des", "une", "pour", "avec", "dans", "mon", "mes", "est", "que", "qui", "pas", "sur", "comment", "quand", "faire", "peut", "bebe", "enfant", "fait", "elle", "son", "ses", "the", "and", "how", "what", "can", "baby", "child", "does", "with", "for", "my"]);
 const SYNS = [[/etrangl|travers|gorge|etouff|choking|choke/, "etouff"], [/rhume|encombr|mouche|enrhum|bouch|blocked|stuffy|runny/, "nez bouche"], [/nosebleed|saign|bleed/, "saignement nez"], [/temperature|chaud|palu|malaria|fever|fievre/, "fievre"], [/crise|tremble|spasme|seizure|fit/, "convuls"], [/selle|vomi|deshydrat|diarrh|ventre/, "diarrhee"], [/tombe|chute|cogne|bosse|fall|head/, "chute tete coup"], [/poison|petrole|javel|medicament|swallow/, "avale produit"], [/mord|serpent|snake/, "serpent"], [/brul|burn/, "brulure"], [/endort|dort|nuit|sleep/, "sommeil dormir"], [/bouillie|manger|aliment|diversif|food|eat|feeding/, "nutrition aliments"], [/allait|sein|lait|breast/, "allait"]];
-const URGENT_RE = /etouff|choking|ne respire (plus|pas)|respire plus|not breathing|inconscien|unconscious|convuls|seizure|saigne beaucoup|poison|avale (un|du|de la) (produit|petrole)|swallowed|serpent|snake|noy/;
+const URGENT_RE = /etouff|choking|ne respire (plus|pas)|respire plus|respire (mal|vite|difficil)|respiration (difficile|anormale|bruyante|rapide|sifflante)|mal a respirer|difficultes? a respirer|souffle court|sifflement|not breathing|trouble breathing|difficulty breathing|hard to breathe|breathing (fast|hard|difficult)|struggling to breathe|cannot breathe|can't breathe|wheez|inconscien|unconscious|convuls|seizure|saigne beaucoup|poison|javel|bleach|avale (un|du|de la) (produit|petrole)|(a|ont|vient de) (bu|avale|ingere) (du|de la|de l|un|une) (produit|petrole|javel|essence|alcool|medicament)|swallowed|serpent|snake|noy/;
 function plainBody(x) { return x.body.map(([t, v]) => t === "ul" ? v.map(i => "- " + i).join("\n") : t === "h" ? "## " + v : v).join("\n"); }
 function searchContents(q, n = 3) {
   let t = normTxt(q); SYNS.forEach(([re, add]) => { if (re.test(t)) t += " " + add; });
@@ -2426,7 +2533,7 @@ function fmtAnswer(text) {
 const urgentBlock = () => `<div class="urgent">${ic("alert")} Situation possiblement urgente : appelez les secours ou allez tout de suite dans un établissement de santé.</div>`;
 function botBubble(m) {
   const links = (m.links || []).map(id => CONTENTS.find(c => c.id === id)).filter(Boolean);
-  return `<div class="bubble bot">${m.urgent ? urgentBlock() : ""}${m.text ? (m.raw ? fmtAnswer(m.text) : `<p>${m.text}</p>`) : ""}${links.length ? `<div class="links">${links.map(c => `<button class="btn sm soft" data-go="content" data-p="${P({ id: c.id })}">${ic("book")}${c.title}</button>`).join("")}${m.urgent ? `<button class="btn sm danger" data-act="call-urgence">${ic("phone")}Appeler les urgences</button>` : ""}</div>` : ""}${m.service ? `<div class="links"><button class="btn sm soft" data-act="ask-go-creche">${ic("pin")}Voir les crèches communautaires</button></div>` : ""}${m.ai ? `<p class="tiny" style="margin-top:8px">Réponse générale rédigée par une IA : elle peut contenir des erreurs et ne remplace pas un professionnel de santé.</p>` : ""}</div>`;
+  return `<div class="bubble bot">${m.urgent ? urgentBlock() : ""}${m.text ? (m.raw ? fmtAnswer(m.text) : `<p>${m.text}</p>`) : ""}${links.length || m.urgent ? `<div class="links">${links.map(c => `<button class="btn sm soft" data-go="content" data-p="${P({ id: c.id })}">${ic("book")}${c.title}</button>`).join("")}${m.urgent ? `<button class="btn sm danger" data-act="call-urgence">${ic("phone")}Appeler les urgences</button>` : ""}</div>` : ""}${m.service ? `<div class="links"><button class="btn sm soft" data-act="ask-go-creche">${ic("pin")}Voir les crèches communautaires</button></div>` : ""}${m.ai ? `<p class="tiny" style="margin-top:8px">Réponse générale rédigée par une IA : elle peut contenir des erreurs et ne remplace pas un professionnel de santé.</p>` : ""}</div>`;
 }
 UI.chat = [];
 function chatHTML() { return UI.chat.map(m => m.role === "user" ? `<div class="bubble me">${esc(m.text)}</div>` : botBubble(m)).join(""); }
@@ -2470,7 +2577,9 @@ function askSubmit(f) {
   answerQuestion(q, share);
 }
 async function answerQuestion(q, share) {
-  const hits = searchContents(q), t = normTxt(q), urgent = URGENT_RE.test(t), wantsCreche = /creche|garderie|day-?care|nursery/.test(t);
+  let hits = searchContents(q); const t = normTxt(q), urgent = URGENT_RE.test(t);
+  if (urgent) { const fa = hits.filter(h => h.category === "Premiers secours"); hits = fa; }   /* en urgence : seulement les fiches de premiers secours */
+  const wantsCreche = /creche|garderie|day-?care|nursery/.test(t);
   UI.chat.push({ role: "user", text: q }); paintChat(false);
   const stop = $("#ask-stop"), send = $("#ask-send");
   if (!aiReady()) {
@@ -2566,6 +2675,7 @@ function render(keep) {
   tb.hidden = !show;
   if (show) tb.innerHTML = trHTML(TABS.map(t => `<button class="tab" data-act="tab" data-id="${t.root}" aria-current="${e.tab === t.id ? "page" : "false"}"><span class="tab-ico">${ic(t.icon)}</span><span>${t.label}</span></button>`).join(""));
   paintNetBar();
+  scr.dataset.route = e.name; document.documentElement.classList.toggle("authed", authed); if (isPC()) renderSide();   /* repères pour la mise en page PC */
   if (keep) scr.scrollTop = top; else { scr.scrollTop = 0; const h = $("h1[tabindex]", scr); if (h && e.name !== "splash") h.focus({ preventScroll: true }); }
   def.onShow && def.onShow();
   if (e.name === "splash") setTimeout(() => { if (cur().name === "splash") leaveSplash(); }, 2600);
@@ -2683,6 +2793,7 @@ const A = {
   "set-lang": el => setLang(el.dataset.l),
   back, "close-sheet": closeSheet, "sheet-bg": (el, e) => { if (e.target === el) closeSheet(); },
   tab: el => go(el.dataset.id, {}, { reset: true }),
+  "pc-go": el => go(el.dataset.r, {}, { reset: true }),
   "skip-splash": leaveSplash,
   async "demo-login"() { await loadDemo(); toast("Profil de démonstration chargé (données fictives)."); go("home", {}, { reset: true }); },
   async "demo-load"() { await loadDemo(); toast("Patricia & Amel chargés (données fictives)."); go("home", {}, { reset: true }); },
@@ -2825,6 +2936,8 @@ if (PWA) {
 /* ---------- Démarrage ---------- */
 document.documentElement.classList.toggle("big", !!S.settings.big);
 renderSide(); render();
+try { matchMedia("(min-width:900px)").addEventListener("change", () => { renderSide(); render(true); }); } catch (e) { }
+document.addEventListener("toggle", e => { if (e.target.matches && e.target.matches("details.pcdemo")) UI.pcDemo = e.target.open; }, true);
 if (navigator.onLine === false) setOnline(false);
 window.addEventListener("load", () => { if (navigator.onLine === false && Net.online) setOnline(false); });
 </script>
